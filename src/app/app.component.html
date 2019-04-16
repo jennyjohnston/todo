@@ -6,10 +6,10 @@
 
   <h2>A place to store the things you have to do!</h2>
 
-  <input type="text" placeholder="Filter your to-do's" [(ngModel)]="filterTasks" (input)="filterFunction()" />
+  <input type="text" placeholder="Filter your to-do's" [(ngModel)]="filterTasks" (input)="filterFunction(todo)" />
 
   <ol>
-    <li *ngFor="let todo of taskItems, trackByEntry let i=index">
+    <li *ngFor="let todo of filteredTasks, trackByEntry let i=index">
       <section><span class="number">{{i + 1}}.</span>
       <button *ngIf="!todo.completed" class="complete" (click)="completeTask(i)">complete</button>
       <span *ngIf="todo.completed" class="completed">{{ todo.task }}</span>

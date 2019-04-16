@@ -25,62 +25,34 @@ export class ToDoComponent {
     { task: 'go to bed on time', completed: false }
   ];
 
-
-  addTask = () => {
-    const newTask = {
-      task: this.taskInput,
-      completed: false,
+addTask = () => {
+  const newTask = {
+    task: this.taskInput,
+    completed: false,
     };
-    this.taskItems.push(newTask);
-    this.taskInput = null;
+      this.taskItems.push(newTask);
+      this.taskInput = null;
+      this.filterFunction();
   };  
 
-  trackByEntry = (index: number, todo: any) => {
-    return index;
+trackByEntry = (index: number, todo: any) => {
+  return index;
 }
 
 removeTask = (index) => {
   this.taskItems.splice(index,1);
+  this.filterFunction()
 };
 
 completeTask = (index) => {
   this.taskItems[index].completed = !this.taskItems[index].completed;
 };
 
+filteredTasks = [...this.taskItems];
+
 filterFunction = () => {
-  this.filterTasks;
   console.log(this.filterTasks)
-
-
-///////
-
-
-  if (this.filterTasks !== null) {
-    this.filterTasks = this.filterTasks.toLowerCase();
-    this.taskItems = this.taskItems.filter(item => item.task.toLowerCase().includes(this.filterTasks));
-  
-  }
-
-
-  ///////
-
-//   if (filterTasks.toUpperCase().indexOf(index) > -1) {
-//     this.filterTasks[index] = "";
-// } else {
-//   this.filterTasks[index] = "none";
-// }
-
-
-
-
-
-
-  /////
-
-  
-    // else {
-    //   this.filterTasks === null;
-    // }
-    
-    }
+  this.filteredTasks = this.taskItems.filter(todo => 
+    todo.task.toLowerCase().includes(this.filterTasks));
+}
 }
