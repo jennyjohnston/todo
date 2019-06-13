@@ -14,6 +14,7 @@ interface Todo {
 export class ToDoComponent {
   title = 'TODO List';
   filterTasks: string;
+  saveTask: string;
   taskInput: string;
   taskItems: Todo[] = [
     { task: 'walk the dog', completed: false },
@@ -26,13 +27,12 @@ export class ToDoComponent {
   ];
 
 addTask = () => {
-  const newTask = {
-    task: this.taskInput,
-    completed: false,
-    };
-      this.taskItems.push(newTask);
-      this.taskInput = null;
-      this.filterFunction();
+  this.saveTask = this.taskInput;
+  let newTask={task: this.saveTask, completed: false};
+  this.taskItems.push(newTask);
+  this.filteredTasks = [...this.taskItems];
+  this.taskInput = null;
+  this.filterFunction();
   };  
 
 trackByEntry = (index: number, todo: any) => {
@@ -41,7 +41,8 @@ trackByEntry = (index: number, todo: any) => {
 
 removeTask = (index) => {
   this.taskItems.splice(index,1);
-  this.filterFunction()
+  this.filteredTasks = [...this.taskItems];
+  this.filterFunction();
 };
 
 completeTask = (index) => {
